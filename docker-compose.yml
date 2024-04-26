@@ -1,0 +1,20 @@
+services:
+  rabbitmq:
+    hostname: myrabbitmq
+    container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
+    ports: 
+      - 15672:15672
+      - 5672:5672
+    restart: always
+    volumes:
+      - ./data:/var/lib/rabbitmq
+    environment: 
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+    logging: 
+      driver: "json-file"
+      options: 
+        max-size: "1k"
+        max-file: "3"
